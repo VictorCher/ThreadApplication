@@ -1,4 +1,10 @@
-﻿using System;
+﻿// Чернышов Виктор. Урок 5
+/* Задание:
+ * Написать приложение, считающее в раздельных потоках:
+ * a. факториал числа N, которое вводится с клавиатуры;
+ * b. сумму целых чисел до N. */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
