@@ -27,6 +27,11 @@ namespace ThreadApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Вычисляет факториал
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         static int Factorial(int n)
         {
             if (n == 0) return 1;
@@ -38,7 +43,11 @@ namespace ThreadApplication
             this.Dispatcher.BeginInvoke((ThreadStart)delegate ()
             { textBox1.Text = Factorial((int)n).ToString(); });
         }
-
+        /// <summary>
+        /// Вычисляет сумму
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         static int Sum(int n)
         {
             int res = 0;
