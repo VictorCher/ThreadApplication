@@ -1,8 +1,14 @@
 ﻿// Чернышов Виктор. Урок 5
-/* Задание:
+
+/* Задание 1:
  * Написать приложение, считающее в раздельных потоках:
  * a. факториал числа N, которое вводится с клавиатуры;
  * b. сумму целых чисел до N. */
+
+/* Задание 2:
+ * Написать приложение, выполняющее парсинг CSV-файла произвольной структуры и
+ * сохраняющего его в обычный txt-файл. Все операции проходят в потоках. CSV-файл заведомо
+ * имеет большой объем. */
 
 using System;
 using System.Collections.Generic;
@@ -27,12 +33,13 @@ namespace ThreadApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Thread thread1, thread2;
         /// <summary>
         /// Вычисляет факториал
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        static int Factorial(int n)
+        static double Factorial(double n)
         {
             if (n == 0) return 1;
             return n * Factorial(n - 1);
@@ -41,8 +48,9 @@ namespace ThreadApplication
         void UpdateFactRes(object n)
         {
             this.Dispatcher.BeginInvoke((ThreadStart)delegate ()
-            { textBox1.Text = Factorial((int)n).ToString(); });
+            { textBox1.Text = Factorial((double)n).ToString(); });
         }
+
         /// <summary>
         /// Вычисляет сумму
         /// </summary>
@@ -64,12 +72,18 @@ namespace ThreadApplication
         public MainWindow()
         {
             InitializeComponent();
+            thread1 = new Thread(new ThreadStart(ParseCsvToTxt.Start));
+            thread2 = new Thread(new ThreadStart(ParseCsvToTxt.Save));
+            thread1.Name = "Thread1";
+            thread1.Start();
+            thread2.Name = "Thread2";
+            thread2.Start();
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            int n;
-            if (int.TryParse(input1.Text, out n))
+            double n;
+            if (double.TryParse(input1.Text, out n))
             {
                 Thread thread = new Thread(new ParameterizedThreadStart(UpdateFactRes));
                 thread.Name = "Вторичный поток 1";

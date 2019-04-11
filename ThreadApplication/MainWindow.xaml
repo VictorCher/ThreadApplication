@@ -12,19 +12,19 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Center" Height="74" Margin="10" VerticalAlignment="Center" Width="497" Orientation="Horizontal">
+        <StackPanel Height="74" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Left">
             <Label x:Name="label1" Content="Факториал числа N:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             <TextBox Name="input1" Height="22" Width="80" HorizontalAlignment="Left" Margin="30,0,0,0" />
             <Button x:Name="button1" Content="Вычислить" Width="80" Margin="10,0,0,0" Height="22" Click="button1_Click" HorizontalAlignment="Left"/>
             <Label x:Name="label11" Content="Результат:" VerticalAlignment="Center" Margin="5,24,0,24" HorizontalAlignment="Left"/>
-            <TextBox x:Name="textBox1" TextWrapping="Wrap" Width="80" VerticalAlignment="Center" Margin="0,26" HorizontalAlignment="Left"/>
+            <TextBox x:Name="textBox1" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,26" MinWidth="80"/>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Center" Height="74" Margin="10" VerticalAlignment="Center" Width="497" Orientation="Horizontal" Grid.Row="1">
+        <StackPanel Height="74" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left">
             <Label x:Name="label2" Content="Сумма целых чисел до N:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             <TextBox Name="input2" Height="22" Width="80" HorizontalAlignment="Left" />
             <Button x:Name="button2" Content="Вычислить" Width="80" Margin="10,0,0,0" Height="22" Click="button2_Click" HorizontalAlignment="Left"/>
             <Label x:Name="label22" Content="Результат:" VerticalAlignment="Center" Margin="5,24,0,24" HorizontalAlignment="Left"/>
-            <TextBox x:Name="textBox2" TextWrapping="Wrap" Width="80" VerticalAlignment="Center" Margin="0,26" HorizontalAlignment="Left"/>
+            <TextBox x:Name="textBox2" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,26" HorizontalAlignment="Left" MinWidth="80"/>
         </StackPanel>
         
 
