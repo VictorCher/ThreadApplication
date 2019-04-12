@@ -62,20 +62,21 @@ namespace AsyncThreadApplication
         public static List<Operation> Read(string path)
         {
             List<Operation> results = new List<Operation>();
-            StreamReader sr = new StreamReader(path, Encoding.GetEncoding(1251));
-            while (!sr.EndOfStream)
+            using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding(1251)))
             {
-                try
+                while (!sr.EndOfStream)
                 {
-                    Operation parse = new Operation(sr.ReadLine());
-                    if(!parse.Fault) results.Add(parse);
-                }
-                catch (Exception exc)
-                {
-                    Console.WriteLine(exc.Message);
+                    try
+                    {
+                        Operation parse = new Operation(sr.ReadLine());
+                        if (!parse.Fault) results.Add(parse);
+                    }
+                    catch (Exception exc)
+                    {
+                        Console.WriteLine(exc.Message);
+                    }
                 }
             }
-            sr.Close();
             return results;
         }
 
