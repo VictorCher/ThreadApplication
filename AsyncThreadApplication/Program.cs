@@ -23,7 +23,7 @@ namespace AsyncThreadApplication
 {
     class Program
     {
-        static int size = 100;
+        static int size = 10;
         static int[,] Create()
         {
             Random rnd = new Random();
@@ -65,19 +65,26 @@ namespace AsyncThreadApplication
                 Console.WriteLine();
             }
         }
-        static void Main(string[] args)
+        static async void Task1()
         {
-            #region Задание 1
+            Console.WriteLine("Запущена задача №1");
             Console.WriteLine("Первая матрица:");
             int[,] A = Create();
             Console.WriteLine("Вторая матрица:");
-            int[,] B = Create();
-            Console.WriteLine("Результирующая матрица:");
-            int[,] C = Multiplication(A,B);
+            int[,] B = Create();     
+            int[,] C = await Task.Run(() => Multiplication(A, B));
+            Console.WriteLine("Результирующая матрица (задача №1):");
             Print(C);
+            Console.WriteLine("Задача №1 выполнена");
+        }
+        static void Main(string[] args)
+        {
+            #region Задание 1
+            Task1();
             #endregion
 
             #region Задание 2
+            Console.WriteLine("Запущена задача №2");
             List<string> path = new List<string>()
             {
                 "..\\..\\data1.txt",
@@ -85,15 +92,18 @@ namespace AsyncThreadApplication
                 "..\\..\\data3.txt",
             };
             List<Operation> results = new List<Operation>();
-            bool add = false;
-            foreach (string file in path)
+            /*foreach (string file in path)
             {
-                results= ParseTxtToDat.Read(file);
-                ParseTxtToDat.Save(results, add);
-                add = true;
-            }
+                Parallel.Invoke(() => results.AddRange(ParseTxtToDat.Read(file)));
+            }*/
+            Parallel.Invoke(
+                () => { Console.WriteLine("Запуск первого потока"); results.AddRange(ParseTxtToDat.Read("..\\..\\data1.txt")); Console.WriteLine("Конец первого потока"); },
+                () => { Console.WriteLine("Запуск второго потока"); results.AddRange(ParseTxtToDat.Read("..\\..\\data2.txt")); Console.WriteLine("Конец второго потока"); },
+                () => { Console.WriteLine("Запуск третьего потока"); results.AddRange(ParseTxtToDat.Read("..\\..\\data3.txt")); Console.WriteLine("Конец третьего потока"); }
+            );
+            ParseTxtToDat.Save(results);
             #endregion
-            Console.WriteLine("Конец программы");
+            Console.WriteLine("Задача №2 выполнена");
             Console.ReadKey();
         }
     }

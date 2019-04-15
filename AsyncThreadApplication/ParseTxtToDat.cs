@@ -83,10 +83,10 @@ namespace AsyncThreadApplication
         /// <summary>
         /// Сохраняет в файл result.dat
         /// </summary>
-        public static void Save(List<Operation> data, bool add)
+        public static void Save(List<Operation> data)
         {
             if (data == null) return;
-            using (StreamWriter sw = new StreamWriter("result.dat", add))
+            using (StreamWriter sw = new StreamWriter("result.dat"))
             {
                 foreach (var v in data)
                     sw.WriteLine($"{v.Number1,2} {v.Operator,2} {v.Number2,2}  =  {v.Result}");
